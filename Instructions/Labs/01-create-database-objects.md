@@ -101,6 +101,11 @@ Create the foundational tables for the e-commerce system.
         INDEX IX_Category ON Product(CategoryID),
         INDEX IX_Supplier ON Product(SupplierID)
     );
+
+    -- Create indexes
+    CREATE INDEX IX_Category ON Product(CategoryID);
+    CREATE INDEX IX_Supplier ON Product(SupplierID);
+
     GO
     ```
 
@@ -193,9 +198,11 @@ JSON columns store flexible, variable data that differs by product type. This ta
 
     -- Add metadata column to Product (JSON type requires SQL Server 2025)
     ALTER TABLE Product ADD Metadata JSON;
+    GO
 
     -- Add computed column for indexing
     ALTER TABLE Product ADD MetadataColor AS JSON_VALUE(Metadata, '$.color');
+    GO
 
     -- Create index on the computed column
     CREATE NONCLUSTERED INDEX IX_Product_Metadata_Color
