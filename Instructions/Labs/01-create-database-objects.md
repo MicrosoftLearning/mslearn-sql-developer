@@ -18,6 +18,8 @@ You are a database designer for an e-commerce platform. You need to create a dat
 
 If your lab virtual machine has been provided and pre-configured, you should find the lab files ready in the **C:\LabFiles** folder. *Take a moment to check, if the files are already there, skip this section*. However, if you're using your own machine or the lab files are missing, you'll need to clone them from *GitHub* to proceed.
 
+> &#9888; **Important:** This exercise requires **SQL Server 2025** or later.
+
 1. From the lab virtual machine or your local machine if one wasn't provided, start a Visual Studio Code session.
 
 1. Open the command palette (Ctrl+Shift+P) and type **Git: Clone**. Select the **Git: Clone** option.
@@ -189,8 +191,8 @@ JSON columns store flexible, variable data that differs by product type. This ta
     USE EcommerceDB;
     GO
 
-    -- Add metadata column to Product
-    ALTER TABLE Product ADD Metadata NVARCHAR(MAX);
+    -- Add metadata column to Product (JSON type requires SQL Server 2025)
+    ALTER TABLE Product ADD Metadata JSON;
 
     -- Add computed column for indexing
     ALTER TABLE Product ADD MetadataColor AS JSON_VALUE(Metadata, '$.color');
