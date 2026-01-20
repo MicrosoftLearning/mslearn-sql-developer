@@ -98,8 +98,6 @@ Create the foundational tables for the e-commerce system.
         CHECK (StockQuantity >= 0),
         FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID),
         FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID),
-        INDEX IX_Category ON Product(CategoryID),
-        INDEX IX_Supplier ON Product(SupplierID)
     );
 
     -- Create indexes
