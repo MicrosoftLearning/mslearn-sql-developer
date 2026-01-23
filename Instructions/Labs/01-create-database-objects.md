@@ -392,8 +392,6 @@ Run verification queries to ensure all database objects were created correctly.
 
 If you are not using the database or the lab files for any other purpose, you can clean up the objects you created in this lab.
 
-### Delete the EcommerceDB database
-
 1. From the lab virtual machine or your local machine if one wasn't provided, start a SQL Server Management Studio session (SSMS).
 1. When SSMS opens, by default the **Connect to Server** dialog will appear. Choose the Default instance and select **Connect**. You might need to check the **Trust server certificate** checkbox.
 1. In **Object Explorer**, expand the **Databases** folder.
