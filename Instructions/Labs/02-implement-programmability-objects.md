@@ -237,13 +237,13 @@ Add a trigger that logs updates to order totals when *SalesLT* order details cha
     -- Audit table
     IF OBJECT_ID('dbo.OrderAudit') IS NULL
     BEGIN
-    CREATE TABLE dbo.OrderAudit (
-        AuditID     INT IDENTITY(1,1) PRIMARY KEY,
-        OrderID     INT NOT NULL,
-        OldTotal    DECIMAL(18,2) NULL,
-        NewTotal    DECIMAL(18,2) NULL,
-        ChangedAt   DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
-    );
+        CREATE TABLE dbo.OrderAudit (
+            AuditID     INT IDENTITY(1,1) PRIMARY KEY,
+            OrderID     INT NOT NULL,
+            OldTotal    DECIMAL(18,2) NULL,
+            NewTotal    DECIMAL(18,2) NULL,
+            ChangedAt   DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+        );
     END
     GO
 
@@ -253,28 +253,28 @@ Add a trigger that logs updates to order totals when *SalesLT* order details cha
     AFTER INSERT, UPDATE
     AS
     BEGIN
-    SET NOCOUNT ON;
-    ;WITH A AS (
-        SELECT SalesOrderID FROM inserted
-        UNION
-        SELECT SalesOrderID FROM deleted
-    )
-    INSERT INTO dbo.OrderAudit (OrderID, OldTotal, NewTotal)
-    SELECT 
-        a.SalesOrderID,
-        d.Total,
-        i.Total
-    FROM (
-        SELECT SalesOrderID, SUM(OrderQty * UnitPrice) AS Total
-        FROM SalesLT.SalesOrderDetail
-        GROUP BY SalesOrderID
-    ) i
-    INNER JOIN (
-        SELECT SalesOrderID, SUM(OrderQty * UnitPrice) AS Total
-        FROM SalesLT.SalesOrderDetail
-        GROUP BY SalesOrderID
-    ) d ON i.SalesOrderID = d.SalesOrderID
-    INNER JOIN A a ON a.SalesOrderID = i.SalesOrderID;
+        SET NOCOUNT ON;
+        ;WITH A AS (
+            SELECT SalesOrderID FROM inserted
+            UNION
+            SELECT SalesOrderID FROM deleted
+        )
+        INSERT INTO dbo.OrderAudit (OrderID, OldTotal, NewTotal)
+        SELECT 
+            a.SalesOrderID,
+            d.Total,
+            i.Total
+        FROM (
+            SELECT SalesOrderID, SUM(OrderQty * UnitPrice) AS Total
+            FROM SalesLT.SalesOrderDetail
+            GROUP BY SalesOrderID
+        ) i
+        INNER JOIN (
+            SELECT SalesOrderID, SUM(OrderQty * UnitPrice) AS Total
+            FROM SalesLT.SalesOrderDetail
+            GROUP BY SalesOrderID
+        ) d ON i.SalesOrderID = d.SalesOrderID
+        INNER JOIN A a ON a.SalesOrderID = i.SalesOrderID;
     END;
     ```
 
