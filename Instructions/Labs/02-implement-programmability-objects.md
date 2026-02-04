@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Lab 2 – Implement programmability objects in SQL Server'
-    module: 'Implement programmability objects in SQL Server'
+    title: 'Lab 2 – Implement programmability objects with SQL'
+    module: 'Implement programmability objects with SQL'
 ---
 
-# Implement programmability objects in SQL Server
+# Implement programmability objects with SQL
 
 **Estimated Time: 45 minutes**
 
