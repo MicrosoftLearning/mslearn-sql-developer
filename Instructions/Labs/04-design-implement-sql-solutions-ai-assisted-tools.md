@@ -139,6 +139,7 @@ Now use GitHub Copilot to generate a stored procedure following your custom guid
 
 1. In Visual Studio Code, create a new file named `usp_GetCustomerOrderSummary.sql`.
 1. Open the **Copilot Chat** panel by pressing **Ctrl+Alt+I** (or selecting the Copilot Chat icon).
+1. Make sure the **Mode** is set to **Ask** in the bottom-left of the Copilot Chat panel.
 1. In the chat, type the following prompt:
 
     ```text
