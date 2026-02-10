@@ -1,6 +1,6 @@
 ---
 lab:
-    title: 'Exercise - Optimize query performance'
+    title: 'Lab 6 - Optimize query performance'
     module: 'Optimize database performance'
 ---
 
