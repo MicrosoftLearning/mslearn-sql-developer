@@ -61,6 +61,7 @@ Before configuring Data API Builder, you need a database with tables and sample 
         CONSTRAINT FK_Products_Categories 
             FOREIGN KEY (CategoryID) REFERENCES dbo.Categories(CategoryID)
     );
+    GO
     
     -- Create a view combining product and category information
     CREATE VIEW dbo.ProductCatalogView AS
@@ -176,10 +177,16 @@ Add the Categories and Products tables as API entities.
     dab add Category --source dbo.Categories --permissions "anonymous:read"
     ```
 
-1. Add the Products entity with full CRUD permissions for authenticated users:
+1. Add Product entity with anonymous read
 
     ```bash
-    dab add Product --source dbo.Products --permissions "anonymous:read" --permissions "authenticated:*"
+    dab add Product --source dbo.Products --permissions "anonymous:read
+    ```
+
+1. Add authenticated full CRUD
+
+    ```bash
+    dab update Product --permissions "authenticated:*"
     ```
 
 1. Open `dab-config.json` to see the generated entities:
