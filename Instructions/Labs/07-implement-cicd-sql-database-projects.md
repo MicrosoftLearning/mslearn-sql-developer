@@ -44,12 +44,17 @@ First, create an Azure SQL Database with sample data.
     | **Database name** | *AdventureWorksLT* |
     | **Server** | Select **Create new** and create a new server with a unique name. Select your **Location**. You should use **Use Microsoft Entra-only authentication** for more secure access, or **Use both SQL and Microsoft Entra authentication**/**SQL authentication** with an admin sign in and password, but note that *Microsoft Entra-only authentication* is recommended. Select **OK**. |
 
+    > &#128221; If you already have a test server you can use, select it instead of creating a new one.
+
 1. Leave **Want to use SQL elastic pool** set to **No**.
 1. For **Workload environment**, select **Development**. This presets the compute to **General Purpose serverless** with auto-pause enabled, which is the most cost-friendly paid option.
 1. Under **Compute + storage**, select **Configure database**. Change the service tier to **Hyperscale** and the compute tier to **Serverless**. Select **Apply** to confirm.
 1. Under **Backup storage redundancy**, select **Locally-redundant backup storage**.
 1. Select **Next: Networking**.
 1. On the **Networking** tab, for **Connectivity method**, select **Public endpoint**.
+
+    > &#128221; If you selected an existing server instead of creating a new one, the **Connectivity method** option may not appear because it is already configured on the server.
+
 1. Under **Firewall rules**, set **Allow Azure services and resources to access this server** to **Yes** and **Add current client IP address** to **Yes**.
 1. Select **Next: Security**, then select **Next: Additional settings**.
 1. On the **Additional settings** tab, under **Data source**, set **Use existing data** to *Sample* to create the AdventureWorksLT sample database. Select **OK** when prompted to confirm.
