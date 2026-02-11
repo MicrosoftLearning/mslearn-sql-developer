@@ -27,37 +27,32 @@ Before starting this exercise, make sure you have the following accounts and too
 
 ## Provision an Azure SQL Database
 
-First, create an Azure SQL Database that you deploy to from the pipeline.
+First, create an Azure SQL Database with sample data.
 
-> &#128221; Skip this section if you already have an AdventureWorksLT Azure SQL Database provisioned. If your server uses SQL authentication, make sure you know the admin login and password. If your server uses Microsoft Entra-only authentication, follow the **Microsoft Entra-only** alternative steps later in this exercise.
+> &#128221; Skip this section if you already have an AdventureWorksLT Azure SQL Database provisioned.
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
-1. Navigate to the **Azure SQL** page, and then select **+ Create**.
-1. Select **SQL databases**, **Single database**, and then select the **Create** button.
-1. Fill in the required information on the **Create SQL Database** page:
+1. Go to the [Azure SQL hub](https://aka.ms/azuresqlhub) and sign in with your Azure account if prompted. In the **Azure SQL Database** pane, select **Show options**, and then select **Create SQL Database**.
+
+    > &#128161; If you see a **Free offer** banner on this page, you can apply it to use Azure SQL Database at no cost. The [free offer](https://learn.microsoft.com/azure/azure-sql/database/free-offer) provides 100,000 vCore seconds of serverless compute and 32 GB of storage per month. If you apply the free offer, skip steps 3 to 6.
+
+1. On the **Basics** tab of the **Create SQL Database** page, fill in the required information:
 
     | Setting | Value |
     | --- | --- |
     | **Subscription** | Select your Azure subscription. |
     | **Resource group** | Select or create a resource group. |
     | **Database name** | *AdventureWorksLT* |
-    | **Server** | Select **Create new** and create a new server with a unique name. Select **Use both SQL and Microsoft Entra authentication** and set a SQL admin sign-in and password. Note the admin sign-in and password, because you need them later for the pipeline. |
-    | **Workload environment** | *Development* |
-    | **Backup storage redundancy** | *Locally-redundant backup storage* |
+    | **Server** | Select **Create new** and create a new server with a unique name. Select your **Location**. You should use **Use Microsoft Entra-only authentication** for more secure access, or **Use both SQL and Microsoft Entra authentication**/**SQL authentication** with an admin sign in and password, but note that *Microsoft Entra-only authentication* is recommended. Select **OK**. |
 
-    > [!NOTE]
-    > If your organization enforces **Microsoft Entra-only authentication** through Azure Policy, that's fine. Follow the alternative steps marked with **(Entra-only alternative)** later in this exercise. You don't need a SQL admin sign-in in that case.
-
-1. Select **Next: Networking** and configure the following settings:
-
-    | Setting | Value |
-    | --- | --- |
-    | **Connectivity method** | *Public endpoint* |
-    | **Allow Azure services and resources to access this server** | *Yes* |
-    | **Add current client IP address** | *Yes* |
-
+1. Leave **Want to use SQL elastic pool** set to **No**.
+1. For **Workload environment**, select **Development**. This presets the compute to **General Purpose serverless** with auto-pause enabled, which is the most cost-friendly paid option.
+1. Under **Compute + storage**, select **Configure database**. Change the service tier to **Hyperscale** and the compute tier to **Serverless**. Select **Apply** to confirm.
+1. Under **Backup storage redundancy**, select **Locally-redundant backup storage**.
+1. Select **Next: Networking**.
+1. On the **Networking** tab, for **Connectivity method**, select **Public endpoint**.
+1. Under **Firewall rules**, set **Allow Azure services and resources to access this server** to **Yes** and **Add current client IP address** to **Yes**.
 1. Select **Next: Security**, then select **Next: Additional settings**.
-1. On the **Additional settings** page, set **Use existing data** to *Sample* to create the AdventureWorksLT sample database.
+1. On the **Additional settings** tab, under **Data source**, set **Use existing data** to *Sample* to create the AdventureWorksLT sample database. Select **OK** when prompted to confirm.
 1. Select **Review + create**, review the settings, and then select **Create**.
 1. Wait for the deployment to complete, then navigate to the new Azure SQL Database resource.
 
