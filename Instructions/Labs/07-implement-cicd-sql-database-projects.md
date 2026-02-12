@@ -92,9 +92,7 @@ Set up Git, authenticate with GitHub, and install the SQL project templates.
 
     > &#128161; After installing, **fully close and reopen Visual Studio Code** (not just the terminal) so it picks up the updated system PATH. If a command still isn't recognized in the Visual Studio Code terminal, run the following command to manually refresh the PATH in your current PowerShell session:
     >
-    > ```powershell
-    > $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-    > ```
+    > `$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")`
 
 1. Configure your Git identity:
 
