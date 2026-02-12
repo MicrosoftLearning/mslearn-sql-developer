@@ -85,15 +85,27 @@ Set up Git, authenticate with GitHub, and install the SQL project templates.
     dotnet --version
     ```
 
-    > &#128221; If any of these commands aren't recognized, install the missing tool before continuing:
-    >
-    > - **Git**: Download and install from [https://git-scm.com/downloads](https://git-scm.com/downloads).
-    > - **GitHub CLI**: Download and install from [https://cli.github.com](https://cli.github.com).
-    > - **.NET SDK 8.0+**: Download and install from [https://dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0).
+    <blockquote>
+    <div markdown="1">
 
-    > &#128161; After installing, **fully close and reopen Visual Studio Code** (not just the terminal) so it picks up the updated system PATH. If a command still isn't recognized in the Visual Studio Code terminal, run the following command to manually refresh the PATH in your current PowerShell session:
-    >
-    > `$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")`
+    &#128221; If any of these commands aren't recognized, install the missing tool before continuing:
+
+    - **Git**: Download and install from [https://git-scm.com/downloads](https://git-scm.com/downloads).
+    - **GitHub CLI**: Download and install from [https://cli.github.com](https://cli.github.com).
+    - **.NET SDK 8.0+**: Download and install from [https://dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0).
+
+    </div>
+    </blockquote>
+
+    <blockquote>
+    <div markdown="1">
+
+    &#128161; After installing, **fully close and reopen Visual Studio Code** (not just the terminal) so it picks up the updated system PATH. If a command still isn't recognized in the Visual Studio Code terminal, run the following command to manually refresh the PATH in your current PowerShell session:
+
+    `$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")`
+
+    </div>
+    </blockquote>
 
 1. Configure your Git identity:
 
