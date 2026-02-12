@@ -61,18 +61,6 @@ First, create an Azure SQL Database with sample data.
 1. Select **Review + create**, review the settings, and then select **Create**.
 1. Wait for the deployment to complete, then navigate to the new Azure SQL Database resource.
 
-### Open the server firewall for GitHub Actions runners
-
-GitHub Actions runners use dynamic IP addresses that change with each workflow run. To allow the pipeline to deploy to your database, you need to temporarily open the server firewall.
-
-1. In the Azure portal, navigate to the **SQL server** resource (not the database).
-1. In the left menu, select **Networking**.
-1. Under **Firewall rules**, select **Add a firewall rule**.
-1. Set **Rule name** to `AllowGitHubRunners`, **Start IP** to `0.0.0.0`, and **End IP** to `255.255.255.255`.
-1. Select **Save**.
-
-> &#9888; This firewall rule opens the server to all IP addresses. Use it only for this exercise and remove it in the cleanup section. In a production environment, use `azure/login` with a service principal or federated credentials so the `azure/sql-action` can add and remove a temporary firewall rule automatically during each pipeline run.
-
 ## Configure your development environment
 
 Set up Git, authenticate with GitHub, and install the SQL project templates.
@@ -520,6 +508,8 @@ To avoid incurring costs, remove the resources you created during this exercise.
     ```bash
     gh repo delete AdventureWorksDB --yes
     ```
+
+    > &#128221; If you get a **403** error saying *Must have admin rights to Repository*, your GitHub CLI token doesn't include the `delete_repo` scope. Run `gh auth refresh -h github.com -s delete_repo` to add it, then retry the delete command.
 
 1. In the Azure portal, navigate to the **SQL server** resource and select **Networking**. Under **Firewall rules**, delete the `AllowGitHubRunners` rule and select **Save**.
 
