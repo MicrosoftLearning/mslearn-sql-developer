@@ -257,7 +257,7 @@ If your server supports SQL authentication, you only need a connection string se
 
     When prompted, paste the full connection string (with the real password) and press **Enter**.
 
-    > &#128221; GitHub encrypts the secret value. It's never visible in logs or to anyone viewing the repository. The workflow accesses it through `${{ secrets.SQL_CONNECTION_STRING }}`.
+    > &#128221; GitHub encrypts the secret value. It's never visible in logs or to anyone viewing the repository. The workflow accesses it through `{% raw %}${{ secrets.SQL_CONNECTION_STRING }}{% endraw %}`.
 
 1. Skip ahead to the **Create the GitHub Actions workflow** section and use **Option A** for the workflow YAML.
 
@@ -366,7 +366,7 @@ Create a workflow file that builds the SQL project and deploys the `.dacpac` to 
           - name: Deploy to Azure SQL Database
             uses: azure/sql-action@v2.3
             with:
-              connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
+              connection-string: {% raw %}${{ secrets.SQL_CONNECTION_STRING }}{% endraw %}
               path: ./bin/Debug/AdventureWorksDB.dacpac
               action: publish
     ```
@@ -407,14 +407,14 @@ Create a workflow file that builds the SQL project and deploys the `.dacpac` to 
           - name: Azure Login
             uses: azure/login@v2
             with:
-              client-id: ${{ secrets.AZURE_CLIENT_ID }}
-              tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-              subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+              client-id: {% raw %}${{ secrets.AZURE_CLIENT_ID }}{% endraw %}
+              tenant-id: {% raw %}${{ secrets.AZURE_TENANT_ID }}{% endraw %}
+              subscription-id: {% raw %}${{ secrets.AZURE_SUBSCRIPTION_ID }}{% endraw %}
 
           - name: Deploy to Azure SQL Database
             uses: azure/sql-action@v2.3
             with:
-              connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
+              connection-string: {% raw %}${{ secrets.SQL_CONNECTION_STRING }}{% endraw %}
               path: ./bin/Debug/AdventureWorksDB.dacpac
               action: publish
     ```
