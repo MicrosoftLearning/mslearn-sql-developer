@@ -86,6 +86,7 @@ Set up Git, authenticate with GitHub, and install the SQL project templates.
     ```
 
     > &#128221; If any of these commands aren't recognized, install the missing tool before continuing:
+    >
     > - **Git**: Download and install from [https://git-scm.com/downloads](https://git-scm.com/downloads).
     > - **GitHub CLI**: Download and install from [https://cli.github.com](https://cli.github.com).
     > - **.NET SDK 8.0+**: Download and install from [https://dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0).
