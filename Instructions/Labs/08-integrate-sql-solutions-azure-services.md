@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Lab 8 – Integrate SQL solutions with Azure services'
-    module: 'Integrate SQL solutions with Azure services'
+  title: Lab 8 – Integrate SQL solutions with Azure services
+  module: Integrate SQL solutions with Azure services
+  description: '**Estimated Time: 30 minutes**'
+  duration: 30 minutes
+  level: 400
+  islab: true
+  primarytopics:
+  - Azure
 ---
 
 # Integrate SQL solutions with Azure services
