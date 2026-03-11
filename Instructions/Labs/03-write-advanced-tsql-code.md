@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 3 – Write advanced T-SQL queries'
-    module: 'Write advanced T-SQL queries'
+  title: Lab 3 – Write advanced T-SQL queries
+  module: Write advanced T-SQL queries
+  description: '**Estimated Time: 30 minutes**'
+  duration: 30 minutes
+  level: 200
+  islab: true
 ---
 
 # Write advanced T-SQL queries
