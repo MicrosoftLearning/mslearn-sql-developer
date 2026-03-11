@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 6 - Optimize query performance'
-    module: 'Optimize database performance'
+  title: Lab 6 - Optimize query performance
+  module: Optimize database performance
+  description: '**Estimated Time: 45 minutes**'
+  duration: 45 minutes
+  level: 300
+  islab: true
 ---
 
 # Optimize query performance
