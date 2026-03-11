@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 4 – Implement SQL solutions by using AI-assisted tools'
-    module: 'Implement SQL solutions by using AI-assisted tools'
+  title: Lab 4 – Implement SQL solutions by using AI-assisted tools
+  module: Implement SQL solutions by using AI-assisted tools
+  description: '**Estimated Time: 45 minutes**'
+  duration: 45 minutes
+  level: 300
+  islab: true
 ---
 
 # Implement SQL solutions by using AI-assisted tools
