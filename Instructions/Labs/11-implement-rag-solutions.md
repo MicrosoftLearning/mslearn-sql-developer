@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 11 – Implement RAG solutions'
-    module: 'Design and implement RAG with SQL'
+  title: Lab 11 – Implement RAG solutions
+  module: Design and implement RAG with SQL
+  description: '**Estimated Time: 45 minutes**'
+  duration: 45 minutes
+  level: 500
+  islab: true
 ---
 
 # Implement RAG solutions
