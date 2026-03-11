@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Lab 2 – Implement programmability objects with SQL'
-    module: 'Implement programmability objects with SQL'
+  title: Lab 2 – Implement programmability objects with SQL
+  module: Implement programmability objects with SQL
+  description: In this exercise, you learned how to implement core SQL Server programmability objects, including views to simplify complex queries, stored procedures to encapsulate transactional business logic, scalar functions for reusable calculations, inline table-valued functions for parameterized result sets, and triggers to automatically capture audit trails when data changes.
+  duration: 45 minutes
+  level: 100
+  islab: true
+  primarytopics:
+    - SQL Server
 ---
 
 # Implement programmability objects with SQL
