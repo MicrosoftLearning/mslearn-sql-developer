@@ -1,7 +1,13 @@
 ---
 lab:
-    title: 'Lab 1 – Design and implement database objects with SQL Server'
-    module: 'Design and implement database objects with SQL Server'
+  title: Lab 1 – Design and implement database objects with SQL Server
+  module: Design and implement database objects with SQL Server
+  description: '**Estimated Time: 30 minutes**'
+  duration: 30 minutes
+  level: 200
+  islab: true
+  primarytopics:
+  - SQL Server
 ---
 
 # Design and implement database objects with SQL
