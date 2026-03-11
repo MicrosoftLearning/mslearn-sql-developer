@@ -1,7 +1,14 @@
 ---
 lab:
-    title: 'Lab 9 – Generate and update embeddings in Azure SQL Database'
-    module: 'Design and implement models and embeddings with SQL'
+  title: Lab 9 – Generate and update embeddings in Azure SQL Database
+  module: Design and implement models and embeddings with SQL
+  description: The AdventureWorksLT sample database contains product information but no customer reviews. In this step, you download and run a script that creates a ProductReview table with 140 realistic reviews across many product categories. These reviews provide the text data that you generate embeddings for in this exercise.
+  duration: 30 minutes
+  level: 400
+  islab: true
+  primarytopics:
+    - Azure
+    - Azure SQL Database
 ---
 
 # Generate and update embeddings in Azure SQL Database
