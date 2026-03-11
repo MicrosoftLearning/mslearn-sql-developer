@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 5 – Implement security and compliance with SQL'
-    module: 'Implement security and compliance with SQL'
+  title: Lab 5 – Implement security and compliance with SQL
+  module: Implement security and compliance with SQL
+  description: '**Estimated Time: 30 minutes**'
+  duration: 30 minutes
+  level: 300
+  islab: true
 ---
 
 # Implement security and compliance with SQL
