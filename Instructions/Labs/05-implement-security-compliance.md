@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 5 – Implement security and compliance with SQL'
-    module: 'Implement security and compliance with SQL'
+  title: Lab 5 – Implement security and compliance with SQL
+  module: Implement security and compliance with SQL
+  description: In this exercise, you implement security features to protect sensitive data in a SQL database. You configure Dynamic Data Masking to hide sensitive information from unauthorized users and implement Row-Level Security to filter data based on user identity.
+  duration: 30 minutes
+  level: 300
+  islab: true
 ---
 
 # Implement security and compliance with SQL

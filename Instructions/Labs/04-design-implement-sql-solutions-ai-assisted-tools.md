@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Lab 4 – Implement SQL solutions by using AI-assisted tools'
-    module: 'Implement SQL solutions by using AI-assisted tools'
+  title: Lab 4 – Implement SQL solutions by using AI-assisted tools
+  module: Implement SQL solutions by using AI-assisted tools
+  description: In this exercise, you practice using AI-assisted development tools to design and implement SQL solutions. You configure GitHub Copilot in Visual Studio Code, create custom instruction files for consistent T-SQL code generation, and use Copilot to generate database objects.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - GitHub
+    - Visual Studio
+    - Visual Studio Code
 ---
 
 # Implement SQL solutions by using AI-assisted tools

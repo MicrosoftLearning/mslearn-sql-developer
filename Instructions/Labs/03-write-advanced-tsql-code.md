@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 3 – Write advanced T-SQL queries'
-    module: 'Write advanced T-SQL queries'
+  title: Lab 3 – Write advanced T-SQL queries
+  module: Write advanced T-SQL queries
+  description: In this exercise, you learned how to write advanced T-SQL queries using JSON functions and window functions. You practiced generating JSON output from query results using FOR JSON PATH, creating nested JSON structures with JSONOBJECT, combining JSON output with CTEs and window functions, and parsing JSON arrays into rows using OPENJSON with a schema.
+  duration: 30 minutes
+  level: 200
+  islab: true
 ---
 
 # Write advanced T-SQL queries

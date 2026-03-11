@@ -1,7 +1,14 @@
 ---
 lab:
-    title: 'Lab 11 – Implement RAG solutions'
-    module: 'Design and implement RAG with SQL'
+  title: Lab 11 – Implement RAG solutions
+  module: Design and implement RAG with SQL
+  description: In this exercise, you implement a complete Retrieval Augmented Generation (RAG) solution using Azure SQL Database. You create a product review table, add a vector column to store embeddings, generate embeddings for customer reviews, use vector search to retrieve relevant reviews, format them as JSON context, construct an augmented prompt, call an Azure OpenAI endpoint, and extract the response.
+  duration: 45 minutes
+  level: 500
+  islab: true
+  primarytopics:
+    - Azure
+    - Azure SQL Database
 ---
 
 # Implement RAG solutions

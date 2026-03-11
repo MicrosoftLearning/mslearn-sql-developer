@@ -1,7 +1,15 @@
 ---
 lab:
-    title: 'Lab 7 - Implement CI/CD with SQL Database Projects'
-    module: 'Implement CI/CD by using SQL Database Projects'
+  title: Lab 7 - Implement CI/CD with SQL Database Projects
+  module: Implement CI/CD by using SQL Database Projects
+  description: 'In this exercise, you created a SQL database project with a table and stored procedure, built the .dacpac locally, and pushed the project to GitHub. You configured a GitHub Actions workflow that builds the project and deploys it to Azure SQL Database using the azure/sql-action. You then pushed a schema change (adding a column to the table) and verified that the pipeline detected the difference and applied the ALTER TABLE automatically. This exercise demonstrated the core CI/CD workflow for database projects: edit the declarative schema, push to source control, and let the pipeline handle the build and deployment.'
+  duration: 45 minutes
+  level: 500
+  islab: true
+  primarytopics:
+    - Azure
+    - Azure SQL Database
+    - GitHub
 ---
 
 # Implement CI/CD with SQL Database Projects
