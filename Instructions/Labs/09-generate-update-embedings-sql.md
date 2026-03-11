@@ -1,7 +1,14 @@
 ---
 lab:
-    title: 'Lab 9 – Generate and update embeddings in Azure SQL Database'
-    module: 'Design and implement models and embeddings with SQL'
+  title: Lab 9 – Generate and update embeddings in Azure SQL Database
+  module: Design and implement models and embeddings with SQL
+  description: '**Estimated Time: 30 minutes**'
+  duration: 30 minutes
+  level: 400
+  islab: true
+  primarytopics:
+  - Azure
+  - Azure SQL Database
 ---
 
 # Generate and update embeddings in Azure SQL Database
