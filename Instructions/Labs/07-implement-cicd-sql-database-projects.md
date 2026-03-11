@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 7 - Implement CI/CD with SQL Database Projects'
-    module: 'Implement CI/CD by using SQL Database Projects'
+  title: Lab 7 - Implement CI/CD with SQL Database Projects
+  module: Implement CI/CD by using SQL Database Projects
+  description: '**Estimated Time: 45 minutes**'
+  duration: 45 minutes
+  level: 500
+  islab: true
 ---
 
 # Implement CI/CD with SQL Database Projects
