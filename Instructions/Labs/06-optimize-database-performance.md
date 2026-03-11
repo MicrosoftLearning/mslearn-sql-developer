@@ -1,7 +1,14 @@
 ---
 lab:
-    title: 'Lab 6 - Optimize query performance'
-    module: 'Optimize database performance'
+  title: Lab 6 - Optimize query performance
+  module: Optimize database performance
+  description: In this exercise, you investigated query performance issues in Azure SQL Database. You analyzed execution plans to identify a missing index and created a covering index that dramatically reduced logical reads. You used DMVs to find the most expensive queries and missing index recommendations across the workload. You simulated a parameter sniffing regression using a stored procedure with skewed data, then used the Top Resource Consuming Queries view in SSMS to detect the regression and force the better plan. You applied a Query Store hint to control parallelism without changing application code. Finally, you diagnosed a writer-writer blocking scenario using DMVs to identify the head blocker, investigated the sleeping session, and resolved it.
+  duration: 45 minutes
+  level: 300
+  islab: true
+  primarytopics:
+    - Azure
+    - Azure SQL Database
 ---
 
 # Optimize query performance
