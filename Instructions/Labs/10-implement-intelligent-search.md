@@ -1,7 +1,12 @@
 ---
 lab:
-    title: 'Lab 10 – Implement intelligent search with full-text, vector, and hybrid queries'
-    module: 'Design and implement models and embeddings with SQL'
+  title: Lab 10 – Implement intelligent search with full-text, vector, and hybrid
+    queries
+  module: Design and implement models and embeddings with SQL
+  description: '**Estimated Time: 45 minutes**'
+  duration: 45 minutes
+  level: 400
+  islab: true
 ---
 
 # Implement intelligent search with full-text, vector, and hybrid queries
