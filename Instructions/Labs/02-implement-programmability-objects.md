@@ -1,7 +1,11 @@
 ---
 lab:
-    title: 'Lab 2 – Implement programmability objects with SQL'
-    module: 'Implement programmability objects with SQL'
+  title: Lab 2 – Implement programmability objects with SQL
+  module: Implement programmability objects with SQL
+  description: '**Estimated Time: 45 minutes**'
+  duration: 45 minutes
+  level: 100
+  islab: true
 ---
 
 # Implement programmability objects with SQL
