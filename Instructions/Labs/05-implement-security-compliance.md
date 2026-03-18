@@ -2,6 +2,15 @@
 lab:
     title: 'Lab 5 – Implement security and compliance with SQL'
     module: 'Implement security and compliance with SQL'
+    description: This exercise will help you implement security features such as Dynamic Data Masking and Row-Level Security to protect sensitive data in a SQL database.
+    level: 300
+    duration: 30 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - Security
+        - Dynamic Data Masking
+        - Row-Level Security
 ---
 
 # Implement security and compliance with SQL

@@ -2,6 +2,15 @@
 lab:
     title: 'Lab 8 – Integrate SQL solutions with Azure services'
     module: 'Integrate SQL solutions with Azure services'
+    description: This exercise will help you create a Data API Builder configuration for a product catalog database and deploy it to Azure with REST and GraphQL endpoints.
+    level: 300
+    duration: 30 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - Data API Builder
+        - REST
+        - GraphQL
 ---
 
 # Integrate SQL solutions with Azure services

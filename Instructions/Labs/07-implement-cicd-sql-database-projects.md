@@ -2,6 +2,15 @@
 lab:
     title: 'Lab 7 - Implement CI/CD with SQL Database Projects'
     module: 'Implement CI/CD by using SQL Database Projects'
+    description: This exercise will help you create a SQL database project, build it locally, push it to GitHub, and configure a GitHub Actions pipeline for automated schema deployment.
+    level: 300
+    duration: 45 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - CI/CD
+        - GitHub Actions
+        - SQL Database Projects
 ---
 
 # Implement CI/CD with SQL Database Projects

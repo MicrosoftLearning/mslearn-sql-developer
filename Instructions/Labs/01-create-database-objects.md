@@ -2,6 +2,14 @@
 lab:
     title: 'Lab 1 – Design and implement database objects with SQL Server'
     module: 'Design and implement database objects with SQL Server'
+    description: This exercise will help you implement various database objects in SQL Server, including tables, constraints, temporal tables, JSON columns, and indexes.
+    level: 300
+    duration: 30 minutes
+    islab: true
+    primarytopics:
+        - SQL Server
+        - Database Design
+        - T-SQL
 ---
 
 # Design and implement database objects with SQL

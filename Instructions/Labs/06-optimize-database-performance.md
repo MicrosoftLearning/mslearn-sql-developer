@@ -2,6 +2,14 @@
 lab:
     title: 'Lab 6 - Optimize query performance'
     module: 'Optimize database performance'
+    description: This exercise will help you investigate slow queries in Azure SQL Database using execution plans, dynamic management views (DMVs), and Query Store.
+    level: 300
+    duration: 45 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - Query Performance
+        - Query Store
 ---
 
 # Optimize query performance

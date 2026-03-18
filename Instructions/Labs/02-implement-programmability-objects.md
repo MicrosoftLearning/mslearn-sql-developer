@@ -2,6 +2,14 @@
 lab:
     title: 'Lab 2 – Implement programmability objects with SQL'
     module: 'Implement programmability objects with SQL'
+    description: This exercise will help you create and use core SQL Server programmability objects including views, stored procedures, functions, and triggers.
+    level: 300
+    duration: 45 minutes
+    islab: true
+    primarytopics:
+        - SQL Server
+        - Stored Procedures
+        - T-SQL
 ---
 
 # Implement programmability objects with SQL

@@ -2,6 +2,14 @@
 lab:
     title: 'Lab 4 – Implement SQL solutions by using AI-assisted tools'
     module: 'Implement SQL solutions by using AI-assisted tools'
+    description: This exercise will help you use AI-assisted development tools like GitHub Copilot to design and implement SQL solutions with consistent standards.
+    level: 300
+    duration: 45 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - GitHub Copilot
+        - AI-Assisted Development
 ---
 
 # Implement SQL solutions by using AI-assisted tools

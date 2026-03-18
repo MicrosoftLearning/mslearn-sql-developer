@@ -2,6 +2,15 @@
 lab:
     title: 'Lab 11 – Implement RAG solutions'
     module: 'Design and implement RAG with SQL'
+    description: This exercise will help you implement a complete Retrieval Augmented Generation (RAG) solution using Azure SQL Database and Azure OpenAI.
+    level: 300
+    duration: 45 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - RAG
+        - Azure OpenAI
+        - Vector Search
 ---
 
 # Implement RAG solutions

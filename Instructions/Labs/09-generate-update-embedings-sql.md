@@ -2,6 +2,14 @@
 lab:
     title: 'Lab 9 – Generate and update embeddings in Azure SQL Database'
     module: 'Design and implement models and embeddings with SQL'
+    description: This exercise will help you create an external model reference, generate embeddings from text stored in Azure SQL Database, and perform basic vector search.
+    level: 300
+    duration: 30 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - Azure OpenAI
+        - Vector Embeddings
 ---
 
 # Generate and update embeddings in Azure SQL Database

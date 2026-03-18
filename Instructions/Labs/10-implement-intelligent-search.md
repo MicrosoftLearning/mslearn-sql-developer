@@ -2,6 +2,15 @@
 lab:
     title: 'Lab 10 – Implement intelligent search with full-text, vector, and hybrid queries'
     module: 'Design and implement models and embeddings with SQL'
+    description: This exercise will help you implement full-text, vector, and hybrid search approaches in Azure SQL Database using Reciprocal Rank Fusion (RRF).
+    level: 300
+    duration: 45 minutes
+    islab: true
+    primarytopics:
+        - Azure SQL Database
+        - Vector Search
+        - Full-Text Search
+        - Azure OpenAI
 ---
 
 # Implement intelligent search with full-text, vector, and hybrid queries
