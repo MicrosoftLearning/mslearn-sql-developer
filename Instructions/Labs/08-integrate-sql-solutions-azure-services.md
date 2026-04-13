@@ -189,7 +189,7 @@ Add the Categories and Products tables as API entities.
 1. Add Product entity with anonymous read
 
     ```bash
-    dab add Product --source dbo.Products --permissions "anonymous:read
+    dab add Product --source dbo.Products --permissions "anonymous:read"
     ```
 
 1. Add authenticated full CRUD
