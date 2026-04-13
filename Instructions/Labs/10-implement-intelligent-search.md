@@ -48,7 +48,13 @@ First, create an Azure SQL Database with sample data.
     | **Subscription** | Select your Azure subscription. |
     | **Resource group** | Select or create a resource group. |
     | **Database name** | *AdventureWorksLT* |
-    | **Server** | Select **Create new** and create a new server with a unique name. Select your **Location**. You should use **Use Microsoft Entra-only authentication** for more secure access, or **Use both SQL and Microsoft Entra authentication**/**SQL authentication** with an admin sign in and password, but note that *Microsoft Entra-only authentication* is recommended. Select **OK**. |
+    | **Server** | Select **Create new** and create a new server with a unique name. Select your **Location**. For authentication, select one of the following options and then select **OK**: |
+
+    > &#128221; **Authentication is not optional** — you must choose the method that matches your organization's security policies. Each option affects how you connect to the database later:
+    > - **Use Microsoft Entra-only authentication** *(recommended)*: Select this if your organization requires Entra-based access. Set your Azure account as the **Microsoft Entra admin**. You connect to the database using your Microsoft Entra account (for example, in SSMS select *Authentication* = **Microsoft Entra MFA**).
+    > - **Use both SQL and Microsoft Entra authentication/SQL authentication**: Select this if you prefer a SQL admin login or your organization allows both methods. Provide a **Server admin login** and **Password** — you need these credentials to connect. You can also set a **Microsoft Entra admin** to enable Entra logins alongside SQL auth.
+    >
+    > The authentication method you choose here controls how *you* connect to the database as a developer. It is separate from how Azure SQL connects to Azure OpenAI, which is configured later in the lab.
 
     > &#128221; If you already have a test server you can use, select it instead of creating a new one.
 
@@ -133,7 +139,13 @@ Since Azure SQL Database uses a system-assigned managed identity to authenticate
 
 The AdventureWorksLT sample database contains product information but no customer reviews. In this step, you download and run a script that creates a **ProductReview** table with 140 realistic reviews across many product categories. These reviews provide rich text data to search through using full-text, vector, and hybrid search.
 
-1. Connect to your Azure SQL Database using Visual Studio Code or SQL Server Management Studio.
+1. Connect to your Azure SQL Database using Visual Studio Code (with the SQL Server extension) or SQL Server Management Studio.
+
+    > &#128161; **How to connect** depends on which authentication method your organization supports and was configured during server creation:
+    > - **Microsoft Entra authentication**: In SSMS, set *Authentication* to **Microsoft Entra MFA** and sign in with your Azure account. In VS Code, select the **Microsoft Entra ID** authentication type when creating a connection profile.
+    > - **SQL authentication**: In SSMS or VS Code, enter the **Server admin login** and **Password** you specified during server creation, with *Authentication* set to **SQL Login**.
+    >
+    > In both cases, set the **Server name** to `<your-server-name>.database.windows.net` and the **Database** to **AdventureWorksLT**.
 1. Download the review script from [**product-reviews-insert.sql**](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-sql-developer/main/Allfiles/product-reviews-insert.sql) and save it locally.
 1. Open the downloaded file and run the entire script against your **AdventureWorksLT** database.
 1. Verify the table was created and populated by running:
