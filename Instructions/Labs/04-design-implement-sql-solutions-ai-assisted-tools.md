@@ -36,8 +36,8 @@ You are a database developer who wants to accelerate your development workflow u
 First, you need to create an Azure SQL Database to use with GitHub Copilot.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
-1. Navigate to the **Azure SQL** page, and then select **+ Create**.
-1. Select **SQL databases**, **Single database**, and then select the **Create** button.
+1. Navigate to the **Azure SQL** page, in the resource menu expand **Azure SQL Database**, and then select **SQL databases**.
+1. Select **+ Create** and select **SQL database**.
 1. Fill in the required information on the **Create SQL Database** page:
 
     | Setting | Value |
@@ -71,7 +71,6 @@ Next, configure Visual Studio Code with the required extensions for AI-assisted 
 1. Open **Visual Studio Code** on your computer.
 1. Select the **Extensions** icon in the Activity Bar (or press **Ctrl+Shift+X**).
 1. Search for and install the following extensions:
-    - **GitHub Copilot** (by GitHub)
     - **GitHub Copilot Chat** (by GitHub)
     - **SQL Server (mssql)** (by Microsoft)
 1. After installation, select the **Accounts** icon in the Activity Bar.

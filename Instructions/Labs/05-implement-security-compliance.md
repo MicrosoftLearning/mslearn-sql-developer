@@ -36,8 +36,8 @@ You are a database developer who needs to protect employee and customer data whi
 First, create an Azure SQL Database for the security exercises.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
-1. Navigate to the **Azure SQL** page, and then select **+ Create**.
-1. Select **SQL databases**, **Single database**, and then select the **Create** button.
+1. Navigate to the **Azure SQL** page, in the resource menu expand **Azure SQL Database**, and then select **SQL databases**.
+1. Select **+ Create** and select **SQL database**.
 1. Fill in the required information on the **Create SQL Database** page:
 
     | Setting | Value |
