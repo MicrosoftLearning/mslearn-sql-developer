@@ -50,9 +50,9 @@ First, create an Azure SQL Database with sample data.
     | **Database name** | *AdventureWorksLT* |
     | **Server** | Select **Create new** and create a new server with a unique name. Select your **Location**. For authentication, select one of the following options and then select **OK**: |
 
-    > &#128221; **Authentication is not optional** — you must choose the method that matches your organization's security policies. Each option affects how you connect to the database later:
+    > &#128221; **Authentication is not optional.** You must choose the method that matches your organization's security policies. Each option affects how you connect to the database later:
     > - **Use Microsoft Entra-only authentication** *(recommended)*: Select this if your organization requires Entra-based access. Set your Azure account as the **Microsoft Entra admin**. You connect to the database using your Microsoft Entra account (for example, in SSMS select *Authentication* = **Microsoft Entra MFA**).
-    > - **Use both SQL and Microsoft Entra authentication/SQL authentication**: Select this if you prefer a SQL admin login or your organization allows both methods. Provide a **Server admin login** and **Password** — you need these credentials to connect. You can also set a **Microsoft Entra admin** to enable Entra logins alongside SQL auth.
+    > - **Use both SQL and Microsoft Entra authentication/SQL authentication**: Select this if you prefer a SQL admin login or your organization allows both methods. Provide a **Server admin login** and **Password**. You need these credentials to connect. You can also set a **Microsoft Entra admin** to enable Entra logins alongside SQL auth.
     >
     > The authentication method you choose here controls how *you* connect to the database as a developer. It is separate from how Azure SQL connects to Azure OpenAI, which is configured later in the lab.
 
@@ -75,42 +75,54 @@ First, create an Azure SQL Database with sample data.
 
 ---
 
-## Deploy an Azure OpenAI model
+## Create a Foundry project and deploy Azure OpenAI models
 
-Next, deploy an Azure OpenAI resource with a chat model and an embedding model.
+Next, create a project in Microsoft Foundry and deploy a chat model and an embedding model.
 
-> &#128221; Skip this section if you already have an Azure OpenAI resource with **gpt-4.1-mini** and **text-embedding-3-small** models deployed.
+> &#128221; Skip this section if you already have an Azure OpenAI resource with **gpt-5.4-mini** and **text-embedding-3-small** models deployed.
 
-1. In the Azure portal, search for **Azure OpenAI** and select **Create**.
-1. Select **Foundry (Recommended)** from the pull-down menu.
-1. Fill in the required information:
+### Create a Foundry project
 
-    | Setting | Value |
-    | --- | --- |
-    | **Subscription** | Select your Azure subscription. |
-    | **Resource group** | Use the same resource group as your SQL Database. |
-    | **Name** | Enter a unique name (for example, *adventureworks-openai*). |
-    | **Region** | Choose a region where Azure OpenAI is available. |
-    | **Default project name** | *proj-sqlailab* |
+The first step is to create a new project in Microsoft Foundry, which will serve as the workspace for deploying and managing your Azure OpenAI models.
 
-1. Select **Review + create**, then select **Create**.
-1. Wait for the deployment to complete, then select **Go to resource**.
-1. On the Azure OpenAI resource overview page, note the **Endpoint** value (for example, `https://adventureworks-openai.cognitiveservices.azure.com/`). You need the endpoint name (the part before `.cognitiveservices.azure.com`) later.
-1. Select **Go to Foundry portal** to open the [Microsoft Foundry](https://ai.azure.com) portal.
+1. Go to [Microsoft Foundry](https://ai.azure.com) and sign in with your Azure account.
 
-    > &#128161; You will deploy two models: **gpt-4.1-mini** (for chat completions) and **text-embedding-3-small** (for embeddings). The following steps guide you through deploying both models.
+    > &#128221; If you see a **New Foundry** toggle in the upper-right corner of the portal, make sure it is turned **on** to use the latest version of the Foundry portal. The steps below assume the new experience.
 
-1. In the Microsoft Foundry portal, select **Model catalog** in the left menu.
-1. Search for and select **gpt-4.1-mini**.
-1. Select **Use this model** to deploy the model.
-1. Set the **Deployment name** to **gpt-4.1-mini** and select **Deploy**.
-1. On the deployment details page, note the **Target URI**. The Target URI looks like `https://<your-endpoint>.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=...`. You need the `api-version` value later.
-1. Now deploy the embedding model. Select **Model catalog** in the left menu to return to the catalog. If the catalog only shows your existing deployment, select **Model catalog** again to access the full catalog.
-1. Search for and select **text-embedding-3-small**.
-1. Select **Use this model** to deploy the embedding model.
-1. Set the **Deployment name** to **text-embedding-3-small** and select **Deploy**.
-1. On the deployment details page, note the **Target URI** for this model as well. It looks like `https://<your-endpoint>.cognitiveservices.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=...`.
-1. In the left menu, select **Models + endpoints** under **My assets** to verify both deployments appear.
+1. Create a new project:
+    1. If a project name is shown in the upper-left corner, select it and then select **Create new project**. If no project exists, select **+ Create project** from the home page.
+    1. Enter a project name (for example, *proj-sqlailab*).
+    1. Expand **Advanced options**. Select the same **Subscription** and **Resource group** you used for your Azure SQL Database, and choose a **Region** where Azure OpenAI models are available.
+    1. Select **Create**. If a **Let's go** prompt appears, select **Let's go**.
+
+### Deploy Azure OpenAI models
+You will deploy two models: **gpt-5.4-mini** (for chat completions) and **text-embedding-3-small** (for embeddings). The following steps guide you through deploying both models.
+
+Let's deploy the **gpt-5.4-mini** model first.
+
+1. Select **Discover** in the top navigation bar. In the search bar at the top of the page, search for **gpt-5.4-mini**. Alternatively, select **View all models** in the **Featured models** section to browse the full catalog. Select **gpt-5.4-mini** from the search results.
+1. On the model details page, select the **Deploy** dropdown and choose **Default settings**.
+1. If a **Select a project to deploy** dialog appears, select the same **Region** you chose when creating the project, then select your project from the **Project** dropdown. Select **Continue**.
+1. Set the **Deployment name** to **gpt-5.4-mini** and select **Deploy**.
+1. After deployment is complete, the model is now deployed.
+
+Let's deploy the **text-embedding-3-small** model next.
+
+1. Now deploy the embedding model. Select **Discover** in the top navigation and search for **text-embedding-3-small**. Select it from the search results.
+1. On the model details page, select the **Deploy** dropdown and choose **Default settings**.
+1. If a **Select a project to deploy** dialog appears, select the same **Region** and **Project** as before and select **Continue**.
+1. After deployment is complete, the model is now deployed.
+
+1. Select **Build** > **Models** in the top navigation to verify both deployments appear.
+
+### Retrieve the Azure OpenAI endpoint
+
+Now retrieve the **Azure OpenAI endpoint** you need for the T-SQL steps later. 
+
+1. In the [Azure portal](https://portal.azure.com/), navigate to your resource group and select the **Foundry** resource that was created with your project (for example, *proj-sqlailab-resource*). 
+1. In the left menu, select **Resource Management** > **Keys and Endpoint**. Select the **OpenAI** tab and note the endpoint URL (for example, `https://proj-sqlailab-resource.openai.azure.com/`). You need the endpoint name (the part before `.openai.azure.com`) later.
+
+    > &#128221; The **Keys and Endpoint** page has three tabs: **Foundry**, **OpenAI**, and **AI Services**. Make sure you select the **OpenAI** tab. This tab shows the endpoint in the format required by Azure SQL Database's `CREATE EXTERNAL MODEL` and `sp_invoke_external_rest_endpoint`. The Foundry tab shows a different `.services.ai.azure.com` URL that does not work with these T-SQL features.
 
 ---
 
@@ -120,10 +132,10 @@ Since Azure SQL Database uses a system-assigned managed identity to authenticate
 
 > &#128221; Skip this section if your SQL Server already has a system-assigned managed identity enabled and it has been granted the **Cognitive Services OpenAI User** role on your Azure OpenAI resource.
 
-1. In the Azure portal, navigate to your **SQL server** (the logical server, not the database).
+1. In the Azure portal, navigate to the **SQL server** you created earlier (the logical server, not the database).
 1. In the left menu, select **Security** > **Identity**.
 1. Under **System assigned managed identity**, set **Status** to **On** and select **Save**.
-1. Now navigate to your **Azure OpenAI** resource (for example, *adventureworks-openai*).
+1. Once the managed identity is enabled on your SQL Server, navigate to your **Azure OpenAI** resource (for example, *adventureworks-openai*).
 1. In the left menu, select **Access control (IAM)**.
 1. Select **+ Add** and then select **Add role assignment**.
 1. On the **Role** tab, search for and select **Cognitive Services OpenAI User**, then select **Next**.
@@ -165,7 +177,7 @@ Set up the credential and model reference needed to call Azure OpenAI from T-SQL
 
 > &#128221; Skip this section if you already have a database scoped credential and an external embedding model configured for your Azure OpenAI endpoint.
 
-1. to create a database scoped credential using managed identity, open a new query window and run the following script. Replace `<your-openai-endpoint>` with the endpoint name from your Azure OpenAI resource (for example, if your endpoint is `https://adventureworks-openai.cognitiveservices.azure.com/`, use *adventureworks-openai*).
+1. to create a database scoped credential using managed identity, open a new query window and run the following script. Replace `<your-openai-endpoint>` with the endpoint name you noted from the **OpenAI** tab (for example, if your endpoint is `https://proj-sqlailab-resource.openai.azure.com/`, use *proj-sqlailab-resource*).
 
     ```sql
     -- Create a database master key if one doesn't exist
@@ -174,12 +186,14 @@ Set up the credential and model reference needed to call Azure OpenAI from T-SQL
     GO
 
     -- Create a credential using Managed Identity
-    CREATE DATABASE SCOPED CREDENTIAL [https://<your-openai-endpoint>.cognitiveservices.azure.com]
+    CREATE DATABASE SCOPED CREDENTIAL [https://<your-openai-endpoint>.openai.azure.com]
     WITH IDENTITY = 'Managed Identity', SECRET = '{"resourceid":"https://cognitiveservices.azure.com"}';
     GO
     ```
 
-    > &#128221; Replace `<your strong password here>` with a strong password. Replace `<your-openai-endpoint>` with the endpoint name from your Azure OpenAI resource (for example, *adventureworks-openai*). The `IDENTITY = 'Managed Identity'` tells Azure SQL Database to authenticate using its system-assigned managed identity. The `resourceid` in the SECRET specifies the Azure OpenAI audience. No API key is needed.
+    > &#128221; Replace `<your strong password here>` with a strong password. Replace `<your-openai-endpoint>` with the endpoint name from the **OpenAI** tab (for example, *proj-sqlailab-resource*).
+    >
+    > &#9888; **Important**: Do **not** change the `resourceid` value in the SECRET. It must remain exactly `https://cognitiveservices.azure.com`. This is the fixed OAuth audience for Azure Cognitive Services, not your specific endpoint URL. Changing it will cause authentication errors.
 
 1. Now create an external model reference for the embedding model. This reference allows you to use `AI_GENERATE_EMBEDDINGS` directly in T-SQL. Replace `<your-openai-endpoint>` with your endpoint name.
 
@@ -187,16 +201,16 @@ Set up the credential and model reference needed to call Azure OpenAI from T-SQL
     -- Create an external model reference for embeddings
     CREATE EXTERNAL MODEL my_embedding_model
     WITH (
-        LOCATION = 'https://<your-openai-endpoint>.cognitiveservices.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=<your-api-version>',
+        LOCATION = 'https://<your-openai-endpoint>.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21',
         API_FORMAT = 'Azure OpenAI',
         MODEL_TYPE = EMBEDDINGS,
         MODEL = 'text-embedding-3-small',
-        CREDENTIAL = [https://<your-openai-endpoint>.cognitiveservices.azure.com]
+        CREDENTIAL = [https://<your-openai-endpoint>.openai.azure.com]
     );
     GO
     ```
 
-    > &#128221; Replace `<your-openai-endpoint>` with the same endpoint name you used in the credential, and `<your-api-version>` with the API version from your text-embedding-3-small **Target URI**. You can also copy the entire `LOCATION` value directly from the Target URI. The `MODEL` option is required and must match the model name.
+    > &#128221; Replace `<your-openai-endpoint>` with the same endpoint name you used in the credential. The `api-version` value `2024-10-21` is the current GA version of the Azure OpenAI REST API. The `MODEL` option is required and must match the model name.
 
 ---
 
@@ -407,7 +421,7 @@ Now you combine retrieved data with a system message and user question to build 
 
 This step is the "G" in RAG, the generation step. You send the augmented prompt to Azure OpenAI and extract the answer.
 
-1. Run the following script to complete the full RAG pipeline. Replace `<your-openai-endpoint>` with your endpoint name and `<your-api-version>` with the API version from your gpt-4.1-mini Target URI.
+1. Run the following script to complete the full RAG pipeline. Replace `<your-openai-endpoint>` with your endpoint name.
 
     ```sql
     DECLARE @userQuestion NVARCHAR(1000) = 'Which tires last the longest and resist punctures?';
@@ -461,10 +475,10 @@ This step is the "G" in RAG, the generation step. You send the augmented prompt 
 
     -- Step 4: Call Azure OpenAI
     EXECUTE @returnValue = sp_invoke_external_rest_endpoint
-        @url = N'https://<your-openai-endpoint>.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=<your-api-version>',
+        @url = N'https://<your-openai-endpoint>.openai.azure.com/openai/deployments/gpt-5.4-mini/chat/completions?api-version=2024-10-21',
         @method = 'POST',
         @payload = @payload,
-        @credential = [https://<your-openai-endpoint>.cognitiveservices.azure.com],
+        @credential = [https://<your-openai-endpoint>.openai.azure.com],
         @response = @response OUTPUT;
 
     -- Step 5: Extract and display the answer
@@ -483,7 +497,7 @@ This step is the "G" in RAG, the generation step. You send the augmented prompt 
     GO
     ```
 
-    > &#128221; Replace `<your-openai-endpoint>` with the same endpoint name used in your credential, and `<your-api-version>` with the API version from your gpt-4.1-mini **Target URI**. The URL uses the `cognitiveservices.azure.com` domain, matching the credential and your Foundry portal Target URI.
+    > &#128221; Replace `<your-openai-endpoint>` with the same endpoint name used in your credential. The `api-version` value `2024-10-21` is the current GA version of the Azure OpenAI REST API.
 
 ---
 
@@ -491,7 +505,7 @@ This step is the "G" in RAG, the generation step. You send the augmented prompt 
 
 Now put it all together in a reusable stored procedure that your application can call.
 
-1. Run the following script to create the stored procedure. Replace `<your-openai-endpoint>` with your endpoint name and `<your-api-version>` with the API version from your gpt-4.1-mini Target URI.
+1. Run the following script to create the stored procedure. Replace `<your-openai-endpoint>` with your endpoint name.
 
     ```sql
     CREATE OR ALTER PROCEDURE dbo.AskProductQuestion
@@ -563,10 +577,10 @@ Now put it all together in a reusable stored procedure that your application can
 
         -- Step 4: Call the model
         EXECUTE @returnValue = sp_invoke_external_rest_endpoint
-            @url = N'https://<your-openai-endpoint>.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=<your-api-version>',
+            @url = N'https://<your-openai-endpoint>.openai.azure.com/openai/deployments/gpt-5.4-mini/chat/completions?api-version=2024-10-21',
             @method = 'POST',
             @payload = @payload,
-            @credential = [https://<your-openai-endpoint>.cognitiveservices.azure.com],
+            @credential = [https://<your-openai-endpoint>.openai.azure.com],
             @response = @response OUTPUT;
 
         -- Step 5: Extract the answer or handle errors
@@ -582,7 +596,7 @@ Now put it all together in a reusable stored procedure that your application can
     GO
     ```
 
-    > &#128221; Replace `<your-openai-endpoint>` with the same endpoint name used in your credential, and `<your-api-version>` with the API version from your gpt-4.1-mini **Target URI**.
+    > &#128221; Replace `<your-openai-endpoint>` with the same endpoint name used in your credential. The `api-version` value `2024-10-21` is the current GA version of the Azure OpenAI REST API.
 
 1. Test the stored procedure with a question about night riding safety:
 

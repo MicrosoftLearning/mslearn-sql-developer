@@ -49,9 +49,9 @@ First, create an Azure SQL Database with sample data.
     | **Database name** | *AdventureWorksLT* |
     | **Server** | Select **Create new** and create a new server with a unique name. Select your **Location**. For authentication, select one of the following options and then select **OK**: |
 
-    > &#128221; **Authentication is not optional** — you must choose the method that matches your organization's security policies. Each option affects how you connect to the database later:
+    > &#128221; **Authentication is not optional.** You must choose the method that matches your organization's security policies. Each option affects how you connect to the database later:
     > - **Use Microsoft Entra-only authentication** *(recommended)*: Select this if your organization requires Entra-based access. Set your Azure account as the **Microsoft Entra admin**. You connect to the database using your Microsoft Entra account (for example, in SSMS select *Authentication* = **Microsoft Entra MFA**).
-    > - **Use both SQL and Microsoft Entra authentication/SQL authentication**: Select this if you prefer a SQL admin login or your organization allows both methods. Provide a **Server admin login** and **Password** — you need these credentials to connect. You can also set a **Microsoft Entra admin** to enable Entra logins alongside SQL auth.
+    > - **Use both SQL and Microsoft Entra authentication/SQL authentication**: Select this if you prefer a SQL admin login or your organization allows both methods. Provide a **Server admin login** and **Password**. You need these credentials to connect. You can also set a **Microsoft Entra admin** to enable Entra logins alongside SQL auth.
 
     > &#128221; If you already have a test server you can use, select it instead of creating a new one.
 

@@ -141,7 +141,7 @@ Encapsulate a business operation that adds an order line item to an existing ord
     END;
     ```
 
-    This stored procedure performs a transactional insert of a new line item. It first validates that the product and order exist—rolling back and throwing an error if either is invalid. After inserting the detail row with the product's list price, it recalculates the order's subtotal from all line items and updates the header. Wrapping everything in a transaction ensures the operation is atomic: either all changes succeed or none are applied.
+    This stored procedure performs a transactional insert of a new line item. It first validates that the product and order exist--rolling back and throwing an error if either is invalid. After inserting the detail row with the product's list price, it recalculates the order's subtotal from all line items and updates the header. Wrapping everything in a transaction ensures the operation is atomic: either all changes succeed or none are applied.
 
 1. Execute the following T-SQL code to test the stored procedure.
 

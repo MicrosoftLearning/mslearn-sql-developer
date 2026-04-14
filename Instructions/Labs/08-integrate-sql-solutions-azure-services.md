@@ -27,9 +27,9 @@ You are a database developer who needs to expose product catalog data through mo
 
 - An [Azure subscription](https://azure.microsoft.com/free)
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) installed and signed in to your subscription
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running (for local testing)
-- A code editor such as [Visual Studio Code](https://code.visualstudio.com/download)
+- A code editor such as [Visual Studio Code](https://code.visualstudio.com/download) and the [SQL Server (mssql) extension](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) installed
 - Access to an Azure SQL Database or SQL Server instance
+- Dotnet SDK 8.0 or later installed.
 
 ---
 
@@ -37,17 +37,23 @@ You are a database developer who needs to expose product catalog data through mo
 
 Before configuring Data API Builder, you need a database with tables and sample data.
 
-1. Connect to your SQL Server or Azure SQL Database using Azure Data Studio or SQL Server Management Studio.
+1. Connect to your SQL Server or Azure SQL Database using SQL Server Management Studio (SSMS) or Visual Studio Code with the SQL Server (mssql) extension. For your database, select **master** if not already selected.
 
 1. Create a new database for this exercise:
 
     ```sql
     CREATE DATABASE ProductCatalog;
     GO
-    
+    ```
+
+    If you created the database in a SQL Server (not Azure SQL Database), switch to the new database:
+
+    ```sql
     USE ProductCatalog;
     GO
     ```
+
+    If you created the database in Azure SQL Database, select the new database from the database dropdown in SSMS or Visual Studio Code, or open a **New Query** window and set the context to the new database.
 
 1. Create the tables for the product catalog:
 
@@ -174,11 +180,13 @@ Use the DAB CLI to create a baseline configuration file.
     }
     ```
 
+    > &#128161; The `dab-config.json` file defines the Data API Builder configuration, including the data source, runtime settings, and entities that will be exposed through the API. Your current settings might differ to the previous example depending on your environment and the database you are connecting to. Your settings will at least include the @env('DATABASE_CONNECTION_STRING') variable, the /api and /graphql paths in the `runtime` section, your mode set to development, and an empty `entities` object.
+
 ---
 
 ## Add entities for tables
 
-Add the Categories and Products tables as API entities.
+On the terminal or in a command prompt, add the Categories and Products tables as API entities.
 
 1. Use the CLI to add the Categories entity:
 
@@ -198,7 +206,7 @@ Add the Categories and Products tables as API entities.
     dab update Product --permissions "authenticated:*"
     ```
 
-1. Open `dab-config.json` to see the generated entities:
+1. Open `dab-config.json` to see the generated entities (your file might look slightly different depending on your environment):
 
     ```json
     "entities": {
@@ -253,7 +261,7 @@ Enhance the Product entity with field mappings and a relationship to Category.
 
     The `mappings` section renames database columns to more API-friendly names. The `relationships` section enables GraphQL clients to navigate from a product to its category.
 
-1. Add the reverse relationship to the Category entity:
+1. Add the reverse relationship to the Category entity, replacing the existing Category entity section in `dab-config.json` with the following:
 
     ```json
     "Category": {
@@ -271,6 +279,8 @@ Enhance the Product entity with field mappings and a relationship to Category.
       ]
     }
     ```
+
+1. Save the changes to `dab-config.json`.
 
 ---
 
@@ -304,19 +314,31 @@ Expose the ProductCatalogView for clients who need combined product and category
 
 ---
 
-## Test locally with Docker
+## Test locally
 
-Run Data API Builder locally to verify your configuration.
+Run Data API Builder locally to verify your configuration. The `dab start` command launches a local web server using the .NET runtime and connects to your database using the connection string you provide.
 
-1. Set the database connection string as an environment variable. Replace the placeholder with your actual connection string:
+1. Open a **PowerShell** or **Bash** terminal. The remaining commands in this section must be run in PowerShell or Bash (not CMD). If you are currently in a CMD prompt, type `pwsh` and press Enter to switch to PowerShell (notice the prompt changes to `PS`).
 
-    ```bash
-    # For PowerShell
-    $env:DATABASE_CONNECTION_STRING="Server=your-server;Database=ProductCatalog;User Id=your-user;Password=your-password;TrustServerCertificate=true"
-    
-    # For Bash
-    export DATABASE_CONNECTION_STRING="Server=your-server;Database=ProductCatalog;User Id=your-user;Password=your-password;TrustServerCertificate=true"
-    ```
+1. Set the database connection string as an environment variable. Use **one** of the two options below depending on how your SQL server was configured for authentication.
+
+    > &#128221; When you (or your admin) created the Azure SQL server, you chose an authentication method based on your organization's security policies. That same choice determines the connection string you use here. If you are unsure which method was configured, check the Azure portal: navigate to your SQL server > **Settings** > **Microsoft Entra ID**. If an Entra admin is set and the **Support only Microsoft Entra authentication for this server** checkbox is checked, use Option A.
+
+    **Option A: Microsoft Entra authentication** (no username/password needed; uses your signed-in Azure identity)
+
+    | Shell | Command |
+    | --- | --- |
+    | **PowerShell** | `$env:DATABASE_CONNECTION_STRING="Server=your-server.database.windows.net;Database=ProductCatalog;Authentication=Active Directory Default;TrustServerCertificate=true"` |
+    | **Bash** | `export DATABASE_CONNECTION_STRING="Server=your-server.database.windows.net;Database=ProductCatalog;Authentication=Active Directory Default;TrustServerCertificate=true"` |
+
+    **Option B: SQL authentication** (use the admin login and password from server creation)
+
+    | Shell | Command |
+    | --- | --- |
+    | **PowerShell** | `$env:DATABASE_CONNECTION_STRING="Server=your-server.database.windows.net;Database=ProductCatalog;User Id=your-user;Password=your-password;TrustServerCertificate=true"` |
+    | **Bash** | `export DATABASE_CONNECTION_STRING="Server=your-server.database.windows.net;Database=ProductCatalog;User Id=your-user;Password=your-password;TrustServerCertificate=true"` |
+
+    > &#128161; Replace `your-server` with your actual server name. For Option B, also replace `your-user` and `your-password` with the admin credentials you set during server creation.
 
 1. Start Data API Builder:
 
@@ -328,9 +350,11 @@ Run Data API Builder locally to verify your configuration.
 
     You should see a JSON response with product data using the mapped field names (id, name, price, stockQuantity).
 
+    > &#128221; **If you used Option A (Microsoft Entra)** and get an error about `DefaultAzureCredential failed to retrieve a token`, your Azure CLI session may have expired. Run `az login --scope https://database.windows.net//.default` in your terminal to re-authenticate, then run `dab start` again.
+
 1. Navigate to `http://localhost:5000/graphql` to access the GraphQL playground.
 
-1. Run a GraphQL query that uses the relationship:
+1. Select **Create Document** to open a new query tab. Paste the following GraphQL query and press **Ctrl+Alt+Enter** (or select the **Run** button) to execute it:
 
     ```graphql
     query {
@@ -349,7 +373,7 @@ Run Data API Builder locally to verify your configuration.
 
     The response includes product information with the related category name, demonstrating the configured relationship.
 
-1. Press `Ctrl+C` to stop Data API Builder.
+1. Go back to the terminal and press `Ctrl+C` to stop Data API Builder.
 
 ---
 
