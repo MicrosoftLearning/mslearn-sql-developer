@@ -238,6 +238,7 @@ JSON columns store flexible, variable data that differs by product type. This ta
         JSON_VALUE(Metadata, '$.material') AS Material
     FROM Product
     WHERE JSON_VALUE(Metadata, '$.color') = 'blue';
+    GO
     ```
 
 ---
