@@ -303,6 +303,7 @@ Partitioning divides large tables into smaller segments for faster queries and e
         MAX(OrderDate) AS MaxDate
     FROM [Order]
     GROUP BY $PARTITION.PF_OrderDate(OrderDate);
+    GO
     ```
 
 ---
