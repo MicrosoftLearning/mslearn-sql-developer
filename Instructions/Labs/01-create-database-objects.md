@@ -184,6 +184,7 @@ Temporal tables automatically track changes over time. This task creates a price
     FROM ProductPrice
     FOR SYSTEM_TIME ALL
     WHERE ProductID = 1;
+    GO
     ```
 
     > &#128221; Note that the temporal table shows both the current price and the previous price with their respective time ranges.
