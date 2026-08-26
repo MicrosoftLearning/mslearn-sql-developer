@@ -324,7 +324,7 @@ In this section, you practice the **retrieval** step of RAG. Instead of using a 
     SELECT @questionVector = AI_GENERATE_EMBEDDINGS(@userQuestion USE MODEL my_embedding_model);
 
     -- Find the top 5 most relevant reviews using ANN vector search
-    SELECT
+    SELECT TOP (5) WITH APPROXIMATE
         p.Name AS ProductName,
         p.ListPrice,
         pc.Name AS Category,
@@ -336,13 +336,13 @@ In this section, you practice the **retrieval** step of RAG. Instead of using a 
         TABLE = dbo.ProductReview AS r,
         COLUMN = ReviewVector,
         SIMILAR_TO = @questionVector,
-        METRIC = 'cosine',
-        TOP_N = 5
+        METRIC = 'cosine'
     ) AS vs
     INNER JOIN SalesLT.Product p 
         ON r.ProductID = p.ProductID
     INNER JOIN SalesLT.ProductCategory pc 
         ON p.ProductCategoryID = pc.ProductCategoryID
+    ORDER BY vs.distance
     FOR JSON PATH;
     GO
     ```
@@ -368,7 +368,7 @@ Now you combine retrieved data with a system message and user question to build 
 
     -- Step 2: Retrieve relevant reviews using ANN vector search
     SET @context = (
-        SELECT
+        SELECT TOP (5) WITH APPROXIMATE
             p.Name AS ProductName,
             p.ListPrice,
             pc.Name AS Category,
@@ -379,13 +379,13 @@ Now you combine retrieved data with a system message and user question to build 
             TABLE = dbo.ProductReview AS r,
             COLUMN = ReviewVector,
             SIMILAR_TO = @questionVector,
-            METRIC = 'cosine',
-            TOP_N = 5
+            METRIC = 'cosine'
         ) AS vs
         INNER JOIN SalesLT.Product p 
             ON r.ProductID = p.ProductID
         INNER JOIN SalesLT.ProductCategory pc 
             ON p.ProductCategoryID = pc.ProductCategoryID
+        ORDER BY vs.distance
         FOR JSON PATH
     );
 
@@ -401,7 +401,7 @@ Now you combine retrieved data with a system message and user question to build 
                 'content': 'Product reviews: ' + ISNULL(@context, '[]') + CHAR(10) + CHAR(10) + 'Customer question: ' + @userQuestion
             )
         ),
-        'max_tokens': CAST(500 AS INT),
+        'max_completion_tokens': CAST(500 AS INT),
         'temperature': 0.5
     );
 
@@ -433,7 +433,7 @@ This step is the "G" in RAG, the generation step. You send the augmented prompt 
 
     -- Step 2: Retrieve relevant reviews using ANN vector search
     SET @context = (
-        SELECT
+        SELECT TOP (5) WITH APPROXIMATE
             p.Name AS ProductName,
             p.ListPrice,
             pc.Name AS Category,
@@ -444,13 +444,13 @@ This step is the "G" in RAG, the generation step. You send the augmented prompt 
             TABLE = dbo.ProductReview AS r,
             COLUMN = ReviewVector,
             SIMILAR_TO = @questionVector,
-            METRIC = 'cosine',
-            TOP_N = 5
+            METRIC = 'cosine'
         ) AS vs
         INNER JOIN SalesLT.Product p 
             ON r.ProductID = p.ProductID
         INNER JOIN SalesLT.ProductCategory pc 
             ON p.ProductCategoryID = pc.ProductCategoryID
+        ORDER BY vs.distance
         FOR JSON PATH
     );
 
@@ -466,7 +466,7 @@ This step is the "G" in RAG, the generation step. You send the augmented prompt 
                 'content': 'Product reviews: ' + ISNULL(@context, '[]') + CHAR(10) + CHAR(10) + 'Customer question: ' + @userQuestion
             )
         ),
-        'max_tokens': CAST(500 AS INT),
+        'max_completion_tokens': CAST(500 AS INT),
         'temperature': 0.5
     );
 
@@ -523,7 +523,7 @@ Now put it all together in a reusable stored procedure that your application can
 
         -- Step 2: Retrieve relevant reviews using ANN vector search
         SET @context = (
-            SELECT
+            SELECT TOP (5) WITH APPROXIMATE
                 p.Name AS ProductName,
                 p.ListPrice,
                 pc.Name AS Category,
@@ -534,13 +534,13 @@ Now put it all together in a reusable stored procedure that your application can
                 TABLE = dbo.ProductReview AS r,
                 COLUMN = ReviewVector,
                 SIMILAR_TO = @questionVector,
-                METRIC = 'cosine',
-                TOP_N = 5
+                METRIC = 'cosine'
             ) AS vs
             INNER JOIN SalesLT.Product p 
                 ON r.ProductID = p.ProductID
             INNER JOIN SalesLT.ProductCategory pc 
                 ON p.ProductCategoryID = pc.ProductCategoryID
+            ORDER BY vs.distance
             FOR JSON PATH
         );
 
@@ -568,7 +568,7 @@ Now put it all together in a reusable stored procedure that your application can
                     'content': 'Product reviews: ' + @context + CHAR(10) + CHAR(10) + 'Customer question: ' + @Question
                 )
             ),
-            'max_tokens': CAST(500 AS INT),
+            'max_completion_tokens': CAST(500 AS INT),
             'temperature': 0.5
         );
 
